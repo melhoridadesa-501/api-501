@@ -6,6 +6,8 @@
 * @type: DB
 */
 
+namespace melhoridade\app\Dados;
+
 	class Banco
 	{
 		private $driver;
