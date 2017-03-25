@@ -13,6 +13,8 @@ $banner = new CadastroBanner();
 //Debug
 // $app['debug'] = true;
 
+// GET
+
 $app->get('/', function(){
 	return 'Hello World';
 });
@@ -24,3 +26,11 @@ $app->get('/usuario', function(){
 $app->get('/banner', function(Application $app) use ($banner){
 	return $app->json($banner->getBanners(), 200);
 });
+
+// POST
+
+$app->post('/michael', function(){
+	return 'Hello World';
+});
+
+$app->run();
