@@ -6,7 +6,8 @@
 	*  @author: Matheus Catossi <matheuscatossi@gmail.com>
 	*/
 
-	interface Dados {
+	interface Dados 
+	{
 		public function buscarTodosDados();
 		public function buscarDados($id);
 		public function inserirDados();
