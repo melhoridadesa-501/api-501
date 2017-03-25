@@ -4,11 +4,14 @@ require_once __DIR__.'./../vendor/autoload.php';
 
 // Chamada de bibliotecas
 use melhoridade\app\Banner\CadastroBanner;
+use melhoridade\app\Noticias\Noticia;
+use melhoridade\app\Dados\Dados;
 use Silex\Application;
 
 // Instancias
-$app = new Application();
-$banner = new CadastroBanner();
+$app     = new Application();
+$banner  = new CadastroBanner();
+$noticia = new Noticia();
 
 //Debug
 // $app['debug'] = true;
@@ -25,6 +28,10 @@ $app->get('/usuario', function(){
 
 $app->get('/banner', function(Application $app) use ($banner){
 	return $app->json($banner->getBanners(), 200);
+});
+
+$app->get('/noticia', function(Application $app) use ($noticia){
+	return $app->json($noticia->buscarDados(), 200);
 });
 
 // POST
