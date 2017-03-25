@@ -1,5 +1,10 @@
 {
   "require": {
     "silex/silex": "2.0.*@stable"
-  }
+  },
+  "autoload": {
+        "psr-0":{
+            "melhoridade\\app\\": "library/"
+        }
+    }
 }
