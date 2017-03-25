@@ -88,7 +88,7 @@ namespace melhoridade\app\Dados;
 			{
 				die('Erro ao conectar com o banco de dados: ' . $e->getMessage());
 			}
-			return pdo;
+			return $pdo;
 		}
 
 	}
