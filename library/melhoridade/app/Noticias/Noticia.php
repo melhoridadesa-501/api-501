@@ -3,9 +3,9 @@
     namespace melhoridade\app\Noticias;
     use melhoridade\app\Dados\Dados;
 
-	/*
-	*  @author: Matheus Catossi
-	*/
+    /*
+    *  @author: Matheus Catossi <matheuscatossi@gmail.com>
+    */
 
      class Noticia implements Dados {
 
@@ -22,9 +22,18 @@
 
         }
 
-        public function buscarDados(){
+        public function buscarDados($id){
             $noticia['titulo'] = "xx";
-            return ($noticia);
+            return $noticia;
+        }
+
+         public function buscarTodosDados(){
+            $noticia[]['titulo'] = "xx";
+            $noticia[]['titulo'] = "xx";
+            $noticia[]['titulo'] = "xx";
+            $noticia[]['titulo'] = "xx";
+            $noticia[]['titulo'] = "xx";
+            return $noticia;
         }
 
         public function inserirDados(){
@@ -34,11 +43,19 @@
             $this->$data_cri           = date("Y-m-d");
             $this->id_status           = $this->consultarStatus("A");
 
-            //return json_encode($status => true);
+            $result['status'] = true;
+            //return $result;
         }
    
-        public function alterarDados(){
+        public function alterarDados($id, $campo, $valor){
+            $this->$id        = $id;
 
+            if($campo == 'status') {
+                if(!is_numeric($valor))
+                    $this->$id_status = $this->consultarStatus($valor);
+                else
+                    $this->$id_status = $valor;
+            }
         }
    
         public function suspenderDados(){
@@ -49,15 +66,6 @@
         
         }
 
-        public function alterarStatusNoticia($id, $status) {
-        	$this->$id        = $id;
-			
-			if(!is_numeric($status))
-				$this->$id_status = $this->consultarStatus;
-			else
-				$this->$id_status = $id_status;
-	
-        }
 
         private function consultarStatus($status_alpha) {
         	return $status;

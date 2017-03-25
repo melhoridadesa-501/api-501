@@ -31,7 +31,11 @@ $app->get('/banner', function(Application $app) use ($banner){
 });
 
 $app->get('/noticia', function(Application $app) use ($noticia){
-	return $app->json($noticia->buscarDados(), 200);
+	return $app->json($noticia->buscarDados('1'), 200);
+});
+
+$app->get('/TodasNoticias', function(Application $app) use ($noticia){
+	return $app->json($noticia->buscarTodosDados(), 200);
 });
 
 // POST
