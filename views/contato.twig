@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <td>Salvar Nome: </td><td>{{ contatoNome | json_encode() }}</td>
+    </tr>
+    <tr>
+        <td>Salvar Telefone: </td><td>{{ contatoTelefone | json_encode() }}</td>
+    </tr>
+    <tr>
+        <td>Salvar E-mail: </td><td>{{ contatoEmail | json_encode() }}</td>
+    </tr>
+</table>
+</body>
+</html>
