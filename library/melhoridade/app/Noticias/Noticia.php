@@ -19,47 +19,67 @@
     private $data_atualiza;
     private $usuario_id_usuario;
     private $status_id_status;
-    private $banco;
+    private $conn;
 
     public function __construct()
     {
-        $this->banco = new Banco();
+        $banco = new Banco();
+        $this->conn = $banco->conecta();
+    }
+
+    public function encodingNoticia($array) 
+    {
+        foreach ($array as $key => $value) {
+            foreach ($value as $key_value => $array_value) {
+                $array[$key][$key_value] = mb_convert_encoding($array_value,"UTF-8","auto");
+            }
+        }
+        return $array;
     }
 
     public function buscarDados($id)
     {
-        $noticia['titulo'] = "xx";
-        return $noticia;
+        $sql = "SELECT id_noticia, titulo, descricao, data_id_data, usuario_id_usuario, status_id_status FROM noticia WHERE id_noticia = {$id}";
+        $result = $this->conn->query($sql);
+
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $array_noticias[]= $row;
+        }
+        return $this->encodingNoticia($array_noticias);
     }
 
     public function buscarTodosDados()
     {
-        $pdo = $this->banco->conecta();
-
+        
         $sql = 'SELECT id_noticia, titulo, descricao, data_id_data, usuario_id_usuario, status_id_status FROM noticia';
-        $result = $pdo->query($sql);
+        $result = $this->conn->query($sql);
 
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-            $array_noticias[$row['id_noticia']]['id']                 = mb_convert_encoding($row['id_noticia'],"UTF-8","auto");
-            $array_noticias[$row['id_noticia']]['titulo']             = mb_convert_encoding($row['titulo'],"UTF-8","auto");
-            $array_noticias[$row['id_noticia']]['descricao']          = mb_convert_encoding($row['descricao'],"UTF-8","auto");
-            $array_noticias[$row['id_noticia']]['data_id_data']       = mb_convert_encoding($row['data_id_data'],"UTF-8","auto");
-            $array_noticias[$row['id_noticia']]['usuario_id_usuario'] = mb_convert_encoding($row['usuario_id_usuario'],"UTF-8","auto");
-            $array_noticias[$row['id_noticia']]['status_id_status']   = mb_convert_encoding($row['status_id_status'],"UTF-8","auto");
+            $array_noticias[]= $row;
         }
-
-        return $array_noticias;
+        return $this->encodingNoticia($array_noticias);
     }
 
     public function inserirDados()
     {
-        $this->$titulo             = $titulo;
-        $this->$descricao              = $descricao;
-        $this->$usuario_id_usuario = $usuario_id_usuario;
-        $this->$data_id_data           = date("Y-m-d");
-        $this->status_id_status           = $this->consultarStatus("A");
+        return true;
+    }
 
-        $result['status'] = true;
+    public function inserirNoticia($id_noticia, $titulo, $descricao, $data_id_data, $usuario_id_usuario, $status_id_status)
+    {
+        $this->id_noticia          = $id_noticia;
+        $this->titulo              = $titulo;
+        $this->descricao           = $descricao;
+        $this->usuario_id_usuario  = $usuario_id_usuario;
+        $this->data_id_data        = date("Y-m-d");
+        $this->status_id_status     = $status_id_status;
+
+        $sql = "INSERT INTO noticia (id_noticia, titulo, descricao, usuario_id_usuario, data_id_data, status_id_status) VALUES('{$id_noticia}','{$titulo}','{$descricao}','{$usuario_id_usuario}','{$data_id_data}','{$status_id_status}')";
+        $result = $this->conn->query($sql);
+
+        $response['status'] = true;
+
+        return $response;
     }
 
     public function alterarDados($id, $campo, $valor)
@@ -86,6 +106,6 @@
 
     private function consultarStatus($status_alpha) 
     {
-    	return $status;
+    	return $status_alpha;
     }
 }
