@@ -110,11 +110,16 @@ $app->get('/idoso', function() use ($app){
     return $app['twig']->render('pages/idoso.twig');
 })->bind('idoso');
 
+//admin
+$app->get('/admin', function() use ($app){
+    return $app['twig']->render('pages/admin.twig');
+})->bind('admin');
 
 // POST
 
 $app->post('/michael', function(){
 	return 'Hello World';
 });
+
 
 $app->run();
