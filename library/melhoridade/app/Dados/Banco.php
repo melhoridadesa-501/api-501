@@ -7,6 +7,7 @@
 */
 
 namespace melhoridade\app\Dados;
+use \PDO;
 
 	class Banco
 	{
@@ -15,10 +16,17 @@ namespace melhoridade\app\Dados;
 		private $dbname;
 		private $user;
 		private $pass;
+		private $pdo;
 
-		public function __constuct()
-		{
-			$this->conecta();
+		public function __construct()
+		{			
+			$this->setDriver('mysql');
+			$this->setHost('localhost');
+			$this->setDbName('melhoridade');
+			$this->setUser('root');
+			$this->setPass('123456');
+
+			//$this->conecta();
 		}
 
 			//	===== SET =====
@@ -79,8 +87,8 @@ namespace melhoridade\app\Dados;
 				$pdo = new PDO(
 					$this->getDriver() . ':host='.
 					$this->getHost() . ';dbname='.
-					$this->getDbName() . ','.
-					$this->getUser() . ','.
+					$this->getDbName(),
+					$this->getUser(),
 					$this->getPass())
 				;
 			}
@@ -93,9 +101,4 @@ namespace melhoridade\app\Dados;
 
 	}
 
-	$a = new Banco();
-	$a->setDriver('mysql');
-	$a->setHost('localhost');
-	$a->setDbName('melhoridade');
-	$a->setUser('root');
-	$a->setPass('123456');
+	

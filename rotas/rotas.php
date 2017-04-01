@@ -14,7 +14,7 @@ $banner  = new CadastroBanner();
 $noticia = new Noticia();
 
 //Debug
-// $app['debug'] = true;
+ $app['debug'] = true;
 
 // GET
 
